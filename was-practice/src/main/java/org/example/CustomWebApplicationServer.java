@@ -63,11 +63,15 @@ public class CustomWebApplicationServer {
                 int result = Calculator.calculate(operator, new PositiveNumber(operand1), new PositiveNumber(operand2));
                 byte[] body = String.valueOf(result).getBytes();
 
-                HttpResponse httpResponse = new HttpResponse(dos);
-                httpResponse.response200Header("application/json", body.length);
-                httpResponse.responseBody(body);
+                createHttpResponse(dos, body);
             }
         }
+    }
+
+    private void createHttpResponse(final DataOutputStream dos, final byte[] body) {
+        HttpResponse httpResponse = new HttpResponse(dos);
+        httpResponse.response200Header("application/json", body.length);
+        httpResponse.responseBody(body);
     }
 
 }

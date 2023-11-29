@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 public class HttpResponse {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpResponse.class);
+    private static final Logger log = LoggerFactory.getLogger(HttpResponse.class);
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private final DataOutputStream dos;
 
@@ -18,12 +19,12 @@ public class HttpResponse {
 
     public void response200Header(final String contentType, final int lengthOfBodyContent) {
         try {
-            dos.writeBytes("HTTP/1.1 200 OK \r\n");
-            dos.writeBytes("Content-Type: " + contentType + ";charset=utf-8\r\n");
-            dos.writeBytes("Content-Length: " + lengthOfBodyContent + "\r\n");
-            dos.writeBytes("\r\n");
+            dos.writeBytes("HTTP/1.1 200 OK " + LINE_SEPARATOR);
+            dos.writeBytes("Content-Type: " + contentType + ";charset=utf-8" + LINE_SEPARATOR);
+            dos.writeBytes("Content-Length: " + lengthOfBodyContent + LINE_SEPARATOR);
+            dos.writeBytes(LINE_SEPARATOR);
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -32,7 +33,7 @@ public class HttpResponse {
             dos.write(body, 0, body.length);
             dos.flush();
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
