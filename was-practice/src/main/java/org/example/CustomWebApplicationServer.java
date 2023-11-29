@@ -3,6 +3,8 @@ package org.example;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +12,10 @@ import org.slf4j.LoggerFactory;
 public class CustomWebApplicationServer {
 
     private static final Logger log = LoggerFactory.getLogger(CustomWebApplicationServer.class);
+    private static final int THREAD_COUNT = 10;
 
     private final int port;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT); // 쓰레드 풀
 
     public CustomWebApplicationServer(final int port) {
         this.port = port;
@@ -36,7 +40,7 @@ public class CustomWebApplicationServer {
     }
 
     private void handleClientRequestInHandler(final Socket clientSocket) throws IOException {
-        new Thread(new ClientRequestHandler(clientSocket)).start();
+        executorService.execute(new ClientRequestHandler(clientSocket));
     }
 
 }
