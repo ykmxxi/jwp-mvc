@@ -1,0 +1,2 @@
+###
+GET http://localhost:8080/calculate?operand1=100&operator=*&operand2=20
