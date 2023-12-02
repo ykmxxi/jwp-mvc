@@ -17,6 +17,9 @@ dependencies {
     // 서블릿
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
+    // reflection
+    implementation 'org.reflections:reflections:0.10.2'
+
     // JSP
     implementation 'javax.servlet:jstl:1.2'
 
