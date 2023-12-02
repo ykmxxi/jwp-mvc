@@ -3,6 +3,8 @@ package org.example.reflection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,6 +48,21 @@ class ReflectionTest {
         Set<Class<?>> beans = new HashSet<>();
         targets.forEach(target -> beans.addAll(reflections.getTypesAnnotatedWith(target)));
         return beans;
+    }
+
+    @DisplayName("리플렉션으로 클래스 정보 얻기: 힙 영역에 로드되어 있는 클래스 타입 객체를 가져옴")
+    @Test
+    void 리플렉션_클래스_정보_스캔() {
+        // given
+        Class<User> clazz = User.class;
+
+        // when
+        List<String> fieldNames = Arrays.stream(clazz.getDeclaredFields())
+                .map(Field::getName)
+                .toList();
+
+        // then
+        assertThat(fieldNames).contains("userId", "name");
     }
 
 }
