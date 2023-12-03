@@ -38,3 +38,7 @@ out/
 
 ### MAC OS ###
 .DS_Store
+
+### Tomcat Webapps ###
+webapps/WEB-INF/classes/
+webapps/WEB-INF/production/
