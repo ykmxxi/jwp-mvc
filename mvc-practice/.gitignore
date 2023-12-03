@@ -42,3 +42,4 @@ out/
 ### Tomcat Webapps ###
 webapps/WEB-INF/classes/
 webapps/WEB-INF/production/
+tomcat.8080/
